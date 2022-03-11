@@ -1,17 +1,30 @@
+// React and ReactDom
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
+//React Router.
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+//React redux.
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+
+//Components Import
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Popular from './components/Popular';
+import NowPlaying from './components/NowPlaying';
+import reducers from './state/reducers/index';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={createStore(reducers, applyMiddleware(thunk))}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="popular" element={<Popular />} />
+        <Route path="nowplaying" element={<NowPlaying />} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

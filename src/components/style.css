@@ -1,0 +1,9 @@
+* {
+  text-align: center;
+}
+
+.movieGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 5fr);
+  gap: 10px;
+}
